@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ISC STRIKE INTERFACE</title>
+  <title>CHRU ALFA2 — Command Interface</title>
   <style>
     body {
       background-color: #000;
@@ -10,78 +10,82 @@
       font-family: 'Courier New', monospace;
       padding: 40px;
     }
+
     .console {
       max-width: 750px;
       margin: 0 auto;
       border: 1px solid #33ff33;
       padding: 20px;
-      line-height: 1.6em;
-      font-size: 1em;
     }
+
     h1 {
       text-align: center;
-      color: #ff4444;
       font-size: 1.4em;
-      margin-bottom: 30px;
+      color: #00ccff;
+      margin-bottom: 10px;
     }
-    .label {
-      display: inline-block;
-      width: 240px;
-      font-weight: bold;
-    }
-    .section {
-      margin-top: 20px;
-    }
+
     .timestamp {
-      margin-top: 40px;
       text-align: center;
       font-size: 0.95em;
       color: #999;
+      margin-bottom: 30px;
+      border-bottom: 1px dashed #444;
+      padding-bottom: 10px;
+    }
+
+    .section {
+      margin-top: 20px;
+    }
+
+    .label {
+      display: inline-block;
+      width: 300px;
+      font-weight: bold;
+      color: #99ff99;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 0.95em;
+      color: #66ff66;
       border-top: 1px dashed #444;
-      padding-top: 10px;
+      padding-top: 15px;
+      text-align: center;
+    }
+
+    .alert {
+      color: #ff3333;
     }
   </style>
 </head>
 <body>
   <div class="console">
-    <h1>ISC STRIKE INTERFACE — ACCESS DENIED</h1>
+    <h1>COMMAND NODE: CHRU–ALFA2<br>Commander Mark Blackburn</h1>
+    <div class="timestamp" id="timestamp">TIMESTAMP LOG → …</div>
 
     <div class="section">
-      <p><span class="label">Uplink:</span> SECURE — PROXNET NODE CZ–07</p>
-      <p><span class="label">Signature Lock:</span> POSITIVE / AUTHORIZATION: FAILED</p>
-      <p><span class="label">Response Code:</span> SIGMA–DELTA–113</p>
-      <hr>
-      <p><span class="label">Asset:</span> REAPER MQ–9</p>
-      <p><span class="label">Ordnance:</span> 2× AGM–114 HELLFIRE</p>
-      <p><span class="label">Fuel Reserve:</span> 78%</p>
-      <p><span class="label">Strike Mode:</span> LOCK + VERIFY</p>
+      <p><span class="label">System Status:</span> ONLINE</p>
+      <p><span class="label">Biological Hazard:</span> All green indicators</p>
+      <p><span class="label">Nuclear Hazard:</span> Slight deviations within safety threshold</p>
+      <p><span class="label">Containment Cells:</span> <span class="alert">BREACH DETECTED — Awaiting Response</span></p>
+      <p><span class="label">Strike Queue:</span> STANDBY / Node: CZ–07</p>
+      <p><span class="label">Comm-Link Status:</span> CZ–06: ACTIVE / CZ–08: INTERMITTENT</p>
+      <p><span class="label">Energy Grid:</span> STABLE — Demand 72%</p>
+      <p><span class="label">Opsat Heartbeat:</span> RECEIVED @ 07:41</p>
+      <p><span class="label">Emergency Override:</span> NOT INITIATED</p>
     </div>
 
-    <div class="section">
-      <p>TARGET LOCKED — HOLDING ON COORDINATE</p>
-      <p>ARRIVING ON TARGET DESTINATION ORBIT...</p>
-      <p>TARGET CONFIRMED ON LASER GUIDANCE...</p>
-      <p>BRACE FOR IMPACT — FINAL LOCK INITIATED...</p>
-      <p>IMPACT VECTOR: FIXED / DRIFT &lt; 1.7%</p>
-      <p>BLAST RADIUS ESTIMATE: 243m</p>
-      <p>COLLATERAL SIGNATURE: 87 / GREENLIGHT ISSUED</p>
-    </div>
-
-    <div class="section">
-      <p>EXECUTED</p><br>
-      <p>ARRIVAL CONFIRMED — ORBITAL HOLD STABLE</p>
-      <p>TARGET PAINTED — LASER LOCK VERIFIED</p>
-      <p>BLAST RADIUS: ~243m</p>
-      <p>PROJECTED COLLATERAL: 87</p>
-      <p>NODE: SENTINEL–A3 LINK STABLE</p><br>
-      <p>TRANSMISSION LOST — CHANNEL CLOSED</p>
-      <p>ARCHIVE TRANSFER: INITIALIZED / REDACTED</p>
-    </div>
-
-    <div class="timestamp">
-      TIMESTAMP LOG → 2025–06–24T01:04:12Z
+    <div class="footer">
+      Spectre-1 ONLINE — Awaiting SITREP on system node<br>
+      INTERSPECTRE CORP is in your hands
     </div>
   </div>
+
+  <script>
+    const now = new Date();
+    const iso = now.toISOString().split(".")[0] + "Z";
+    document.getElementById("timestamp").textContent = "TIMESTAMP LOG → " + iso;
+  </script>
 </body>
 </html>
-``
