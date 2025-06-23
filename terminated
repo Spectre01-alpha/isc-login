@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <title>ACCESS DENIED</title>
+  <style>
+    body {
+      background-color: black;
+      color: red;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      animation: flash 0.2s infinite alternate;
+    }
+    @keyframes flash {
+      from { background-color: #000; }
+      to { background-color: #140000; }
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 1.1em;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>⚠️ PŘÍSTUP ODEPŘEN ⚠️</h1>
+  <p>Autentizace selhala — Protokol SIGMA–DELTA–113 aktivován</p>
+  <p>VYSÍLÁM REAPER–DRON NA VAŠI POZICI</p>
+  <p>🛰️ Lokace: CZ–07 – Zaznamenán pohyb subjektu bez oprávnění</p>
+</body>
+</html>
