@@ -2,25 +2,25 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8" />
-  <title>⚠️ PŘÍSTUP ODEPŘEN ⚠️</title>
+  <title>ACCESS DENIED</title>
   <style>
     body {
-      background-color: black;
-      color: red;
+      background-color: #000;
+      color: #ff4444;
       font-family: 'Courier New', monospace;
       text-align: center;
-      padding-top: 10%;
-      animation: backgroundFlash 0.4s alternate infinite;
+      padding-top: 8%;
+      animation: pulse 0.4s infinite alternate;
     }
 
-    @keyframes backgroundFlash {
+    @keyframes pulse {
       from { background-color: #000; }
-      to { background-color: #1a0000; }
+      to { background-color: #170000; }
     }
 
-    .glitch {
+    .title {
       font-size: 2em;
-      animation: glitch 0.2s infinite;
+      animation: glitch 0.15s infinite;
     }
 
     @keyframes glitch {
@@ -30,51 +30,52 @@
     }
 
     .terminal {
-      margin-top: 40px;
+      margin-top: 30px;
       font-size: 1em;
       line-height: 1.6em;
     }
 
-    .bold {
-      font-weight: bold;
-      color: #ff3333;
-    }
-
     #countdown {
-      font-size: 1.5em;
+      font-size: 1.4em;
       margin-top: 20px;
-      color: #ff3333;
+      color: #ff0000;
     }
 
-    .final {
+    .executed {
       display: none;
       color: white;
-      font-size: 1.2em;
       margin-top: 30px;
+      font-size: 1.2em;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%   { opacity: 1; }
+      50%  { opacity: 0; }
+      100% { opacity: 1; }
     }
   </style>
 </head>
 <body>
-  <div class="glitch">⚠️ PŘÍSTUP ODEPŘEN ⚠️</div>
+  <div class="title">⚠️ PŘÍSTUP ODEPŘEN ⚠️</div>
 
   <div class="terminal">
-    <p>KÓD SELHÁNÍ: <span class="bold">SIGMA–DELTA–113</span></p>
-    <p>VYSÍLÁM TAKTICKOU JEDNOTKU: <span class="bold">REAPER MQ-9</span></p>
-    <p>FUEL: <span class="bold">78%</span> | ZBRANĚ: <span class="bold">2× AGM-114</span></p>
-    <p>STATUS: <span class="bold">Designating target…</span></p>
+    <p>Kód selhání: <strong>SIGMA–DELTA–113</strong></p>
+    <p>REAPER MQ-9 • FUEL: 78% • 2× AGM-114</p>
+    <p>STATUS: Designating target…</p>
   </div>
 
   <div id="countdown">ETA: 00:00:20</div>
 
-  <div class="final" id="final-msg">
-    <p>✅ EXECUTE CONFIRMATION – TARGET LOCKED</p>
-    <p>🔻 Spojení přerušeno — systém odpojen od sítě PROXNET</p>
+  <div class="executed" id="exec">
+    ✅ EXECUTE CONFIRMATION — TARGET LOCKED<br/>
+    🛰️ Spojení s uzlem CZ–07 přerušeno
   </div>
 
   <script>
     let seconds = 20;
     const countdown = document.getElementById("countdown");
-    const final = document.getElementById("final-msg");
+    const exec = document.getElementById("exec");
 
     const timer = setInterval(() => {
       seconds--;
@@ -84,7 +85,7 @@
       if (seconds <= 0) {
         clearInterval(timer);
         countdown.style.display = "none";
-        final.style.display = "block";
+        exec.style.display = "block";
       }
     }, 1000);
   </script>
