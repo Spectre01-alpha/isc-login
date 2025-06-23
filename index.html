@@ -38,3 +38,60 @@
 
     .loader {
       display: none;
+      font-size: 1.1em;
+      margin-top: 25px;
+      animation: blink 1s step-end infinite;
+    }
+
+    .alert {
+      display: none;
+      color: #ff4444;
+      font-size: 0.95em;
+      margin-top: 25px;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    .glitch {
+      color: #f33;
+      font-size: 1.1em;
+      margin-top: 20px;
+      animation: glitch 0.3s infinite;
+    }
+
+    @keyframes glitch {
+      0% { text-shadow: 2px 0 red; }
+      50% { text-shadow: -2px 0 cyan; }
+      100% { text-shadow: 2px 0 red; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>ISC ACCESS PORTAL</h1>
+    <p>Přístup povolen pouze pro prověrku <strong>BETA a vyšší</strong></p>
+    <input type="password" placeholder="Zadejte ověřovací klíč..." />
+    <br />
+    <button onclick="launchSequence()">Potvrdit</button>
+
+    <div class="loader" id="loader">Načítání… Připojování k PROXNET █</div>
+    <div class="alert" id="alert">
+      <div class="glitch">⚠️ PŘÍSTUP ODEPŘEN ⚠️</div>
+      <p>Zahájena lokalizace připojení<br>REŽIM: REAPER-UNIT • DRON AKTIVOVÁN</p>
+      <p>Kód chyby: SIGMA–DELTA–113</p>
+    </div>
+  </div>
+
+  <script>
+    function launchSequence() {
+      document.getElementById("loader").style.display = "block";
+      setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("alert").style.display = "block";
+      }, 3500);
+    }
+  </script>
+</body>
+</html>
