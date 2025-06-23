@@ -64,4 +64,80 @@
     <h1>ISC STRIKE INTERFACE — ACCESS DENIED</h1>
 
     <p><span class="label">Uplink:</span> SECURE — PROXNET NODE CZ–07</p>
-    <p><span class="label">Signature
+    <p><span class="label">Signature Lock:</span> POSITIVE / AUTHORIZATION: FAILED</p>
+    <p><span class="label">Response Code:</span> SIGMA–DELTA–113</p>
+    <hr>
+    <p><span class="label">Asset:</span> REAPER MQ–9</p>
+    <p><span class="label">Ordnance:</span> 2× AGM–114 HELLFIRE</p>
+    <p><span class="label">Fuel Reserve:</span> 78%</p>
+    <p><span class="label">Strike Mode:</span> LOCK + VERIFY</p>
+
+    <div id="eta">ETA: 00:00:20</div>
+    <div id="phaseLog"></div>
+
+    <div id="postExec">
+      EXECUTED<br><br>
+      ARRIVAL CONFIRMED — ORBITAL HOLD STABLE<br>
+      TARGET PAINTED — LASER LOCK VERIFIED<br>
+      BLAST RADIUS: ~243m<br>
+      PROJECTED COLLATERAL: 87<br>
+      NODE: SENTINEL–A3 LINK STABLE<br><br>
+      TRANSMISSION LOST — CHANNEL CLOSED<br>
+      ARCHIVE TRANSFER: INITIALIZED / REDACTED
+      <div class="timestamp" id="timestamp"></div>
+    </div>
+  </div>
+
+  <script>
+    const eta = document.getElementById("eta");
+    const phaseLog = document.getElementById("phaseLog");
+    const postExec = document.getElementById("postExec");
+    const ts = document.getElementById("timestamp");
+
+    const countdownStart = 20;
+    const delayPerLine = 1600;
+
+    const sequence = [
+      "TARGET LOCKED — HOLDING ON COORDINATE",
+      "ARRIVING ON TARGET DESTINATION ORBIT...",
+      "TARGET CONFIRMED ON LASER GUIDANCE...",
+      "BRACE FOR IMPACT — FINAL LOCK INITIATED...",
+      "IMPACT VECTOR: FIXED / DRIFT < 1.7%",
+      "BLAST RADIUS ESTIMATE: 243m",
+      "COLLATERAL SIGNATURE: 87 / GREENLIGHT ISSUED"
+    ];
+
+    function startSequence() {
+      eta.style.display = "none";
+      let i = 0;
+      const step = () => {
+        if (i < sequence.length) {
+          phaseLog.innerHTML += sequence[i] + "<br>";
+          i++;
+          setTimeout(step, delayPerLine);
+        } else {
+          setTimeout(() => {
+            phaseLog.style.display = "none";
+            postExec.style.display = "block";
+            const now = new Date();
+            const iso = now.toISOString().split(".")[0] + "Z";
+            ts.textContent = "TIMESTAMP LOG → " + iso;
+          }, 1800);
+        }
+      };
+      step();
+    }
+
+    let countdown = countdownStart;
+    eta.textContent = `ETA: 00:00:${countdown < 10 ? "0" + countdown : countdown}`;
+    const timer = setInterval(() => {
+      countdown--;
+      eta.textContent = `ETA: 00:00:${countdown < 10 ? "0" + countdown : countdown}`;
+      if (countdown <= 0) {
+        clearInterval(timer);
+        startSequence();
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
