@@ -2,36 +2,67 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8" />
-  <title>ISC LOGIN PORTAL</title>
+  <title>ISC LOGIN TERMINAL</title>
   <style>
     body {
       background-color: #000;
-      color: #00ffcc;
-      font-family: monospace;
-      text-align: center;
+      color: #33ff33;
+      font-family: 'Courier New', monospace;
       padding-top: 10%;
+      text-align: center;
     }
+
+    .container {
+      display: inline-block;
+      border: 1px solid #33ff33;
+      padding: 40px;
+      max-width: 500px;
+    }
+
+    h1 {
+      font-size: 1.5em;
+      color: #00ccff;
+      margin-bottom: 30px;
+    }
+
     input, button {
-      margin: 10px;
+      margin-top: 15px;
       padding: 10px;
+      width: 80%;
       background-color: #111;
-      color: #00ffcc;
-      border: 1px solid #00ffcc;
+      color: #33ff33;
+      border: 1px solid #33ff33;
     }
-    .warning {
+
+    #error {
+      margin-top: 20px;
       color: #ff4444;
-      margin-top: 30px;
+      display: none;
     }
   </style>
 </head>
 <body>
-  <h1>ISC ACCESS PORTAL</h1>
-  <p>Přístup povolen pouze pro úroveň <strong>BETA</strong> a vyšší</p>
-  <input type="password" placeholder="Zadejte ověřovací klíč…" />
-  <br />
-  <button onclick="window.location.href='terminated.html'">Potvrdit</button>
-  <div class="warning">
-    🚨 Sledování neoprávněného přístupu spuštěno...
+  <div class="container">
+    <h1>CHRU ACCESS INTERFACE</h1>
+    <p>Authentication required — ALFA clearance only</p>
+    <input type="password" id="codeInput" placeholder="Enter command key…" />
+    <br />
+    <button onclick="checkCode()">Confirm</button>
+    <div id="error">❌ ACCESS DENIED — Unauthorized command key</div>
   </div>
+
+  <script>
+    function checkCode() {
+      const pass = document.getElementById("codeInput").value.trim();
+      if (pass === "CHRUspectre2") {
+        window.location.href = "success.html";
+      } else {
+        document.getElementById("error").style.display = "block";
+        setTimeout(() => {
+          window.location.href = "terminated.html";
+        }, 1500);
+      }
+    }
+  </script>
 </body>
 </html>
