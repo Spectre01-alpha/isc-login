@@ -1,91 +1,90 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <title>ACCESS DENIED</title>
+  <meta charset="UTF-8">
+  <title>ISC STRIKE INTERFACE</title>
   <style>
     body {
       background-color: #000;
-      color: #ff4444;
+      color: #33ff33;
       font-family: 'Courier New', monospace;
-      text-align: center;
-      padding-top: 8%;
-      animation: pulse 0.4s infinite alternate;
+      padding: 40px;
     }
 
-    @keyframes pulse {
-      from { background-color: #000; }
-      to { background-color: #170000; }
-    }
-
-    .title {
-      font-size: 2em;
-      animation: glitch 0.15s infinite;
-    }
-
-    @keyframes glitch {
-      0% { text-shadow: 2px 0 red; }
-      50% { text-shadow: -2px 0 cyan; }
-      100% { text-shadow: 2px 0 red; }
-    }
-
-    .terminal {
-      margin-top: 30px;
-      font-size: 1em;
+    .console {
+      max-width: 700px;
+      margin: 0 auto;
       line-height: 1.6em;
+      font-size: 1em;
+      border: 1px solid #33ff33;
+      padding: 20px;
     }
 
-    #countdown {
+    h1 {
+      text-align: center;
+      color: #ff4444;
+      margin-bottom: 30px;
       font-size: 1.4em;
-      margin-top: 20px;
-      color: #ff0000;
     }
 
-    .executed {
-      display: none;
-      color: white;
-      margin-top: 30px;
+    .label {
+      display: inline-block;
+      width: 200px;
+      font-weight: bold;
+    }
+
+    #eta {
       font-size: 1.2em;
-      animation: blink 1s infinite;
+      margin-top: 20px;
+      color: #ff4444;
     }
 
-    @keyframes blink {
-      0%   { opacity: 1; }
-      50%  { opacity: 0; }
-      100% { opacity: 1; }
+    .confirm {
+      display: none;
+      margin-top: 30px;
+      color: white;
+      background: #111;
+      padding: 15px;
+      border: 1px solid #555;
     }
   </style>
 </head>
 <body>
-  <div class="title">⚠️ PŘÍSTUP ODEPŘEN ⚠️</div>
+  <div class="console">
+    <h1>⚠️ ISC STRIKE INTERFACE // ACCESS REJECTED</h1>
 
-  <div class="terminal">
-    <p>Kód selhání: <strong>SIGMA–DELTA–113</strong></p>
-    <p>REAPER MQ-9 • FUEL: 78% • 2× AGM-114</p>
-    <p>STATUS: Designating target…</p>
-  </div>
+    <p><span class="label">Uplink Status:</span> SECURE</p>
+    <p><span class="label">Node Source:</span> PROXNET CZ–07</p>
+    <p><span class="label">Target Signature:</span> POSITIVE</p>
+    <p><span class="label">Lock Sequence:</span> COORDINATES 50.2589N / 12.9442E</p>
+    <p><span class="label">Authorization:</span> FAILED — SIGMA–DELTA–113</p>
+    <hr>
+    <p><span class="label">Asset Deployed:</span> REAPER MQ-9</p>
+    <p><span class="label">Payload:</span> 2x AGM-114 HELLFIRE</p>
+    <p><span class="label">Fuel Status:</span> 78%</p>
+    <p><span class="label">Strike Mode:</span> TRACK + VERIFY</p>
 
-  <div id="countdown">ETA: 00:00:20</div>
+    <div id="eta">ETA: 00:00:20</div>
 
-  <div class="executed" id="exec">
-    ✅ EXECUTE CONFIRMATION — TARGET LOCKED<br/>
-    🛰️ Spojení s uzlem CZ–07 přerušeno
+    <div class="confirm" id="confirm">
+      ✅ EXECUTE CONFIRMATION — TARGET LOCKED<br>
+      📡 Tactical feed: DISCONNECTED<br>
+      🛰️ REAPER–UNIT RETURNING TO ORBITAL NODE
+    </div>
   </div>
 
   <script>
     let seconds = 20;
-    const countdown = document.getElementById("countdown");
-    const exec = document.getElementById("exec");
+    const etaDisplay = document.getElementById("eta");
+    const confirmBox = document.getElementById("confirm");
 
     const timer = setInterval(() => {
       seconds--;
-      let s = seconds < 10 ? "0" + seconds : seconds;
-      countdown.textContent = `ETA: 00:00:${s}`;
-
+      etaDisplay.textContent = `ETA: 00:00:${seconds < 10 ? "0" + seconds : seconds}`;
       if (seconds <= 0) {
         clearInterval(timer);
-        countdown.style.display = "none";
-        exec.style.display = "block";
+        etaDisplay.style.display = "none";
+        confirmBox.style.display = "block";
       }
     }, 1000);
   </script>
