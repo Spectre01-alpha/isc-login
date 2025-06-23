@@ -2,96 +2,36 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8" />
-  <title>ISC ACCESS PORTAL</title>
+  <title>ISC LOGIN PORTAL</title>
   <style>
     body {
-      background-color: #0a0a0a;
+      background-color: #000;
       color: #00ffcc;
-      font-family: 'Courier New', monospace;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .container {
+      font-family: monospace;
       text-align: center;
-      border: 1px solid #00ffcc;
-      padding: 40px;
-      max-width: 600px;
+      padding-top: 10%;
     }
-
-    h1 {
-      font-size: 1.6em;
-      margin-bottom: 20px;
-    }
-
     input, button {
+      margin: 10px;
       padding: 10px;
-      margin-top: 15px;
-      width: 80%;
       background-color: #111;
       color: #00ffcc;
       border: 1px solid #00ffcc;
     }
-
-    .loader {
-      display: none;
-      font-size: 1.1em;
-      margin-top: 25px;
-      animation: blink 1s step-end infinite;
-    }
-
-    .alert {
-      display: none;
+    .warning {
       color: #ff4444;
-      font-size: 0.95em;
-      margin-top: 25px;
-    }
-
-    @keyframes blink {
-      50% { opacity: 0; }
-    }
-
-    .glitch {
-      color: #f33;
-      font-size: 1.1em;
-      margin-top: 20px;
-      animation: glitch 0.3s infinite;
-    }
-
-    @keyframes glitch {
-      0% { text-shadow: 2px 0 red; }
-      50% { text-shadow: -2px 0 cyan; }
-      100% { text-shadow: 2px 0 red; }
+      margin-top: 30px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>ISC ACCESS PORTAL</h1>
-    <p>Přístup povolen pouze pro prověrku <strong>BETA a vyšší</strong></p>
-    <input type="password" placeholder="Zadejte ověřovací klíč..." />
-    <br />
-    <button onclick="launchSequence()">Potvrdit</button>
-
-    <div class="loader" id="loader">Načítání… Připojování k PROXNET █</div>
-    <div class="alert" id="alert">
-      <div class="glitch">⚠️ PŘÍSTUP ODEPŘEN ⚠️</div>
-      <p>Zahájena lokalizace připojení<br>REŽIM: REAPER-UNIT • DRON AKTIVOVÁN</p>
-      <p>Kód chyby: SIGMA–DELTA–113</p>
-    </div>
+  <h1>ISC ACCESS PORTAL</h1>
+  <p>Přístup povolen pouze pro úroveň <strong>BETA</strong> a vyšší</p>
+  <input type="password" placeholder="Zadejte ověřovací klíč…" />
+  <br />
+  <button onclick="window.location.href='terminated.html'">Potvrdit</button>
+  <div class="warning">
+    🚨 Sledování neoprávněného přístupu spuštěno...
   </div>
-
-  <script>
-    function launchSequence() {
-      document.getElementById("loader").style.display = "block";
-      setTimeout(() => {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("alert").style.display = "block";
-      }, 3500);
-    }
-  </script>
 </body>
 </html>
