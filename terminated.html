@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>ISC STRIKE INTERFACE</title>
@@ -10,6 +10,7 @@
       font-family: 'Courier New', monospace;
       padding: 40px;
     }
+
     .console {
       max-width: 750px;
       margin: 0 auto;
@@ -18,22 +19,26 @@
       border: 1px solid #33ff33;
       padding: 20px;
     }
+
     h1 {
       text-align: center;
       color: #ff4444;
       margin-bottom: 30px;
       font-size: 1.4em;
     }
+
     .label {
       display: inline-block;
       width: 240px;
       font-weight: bold;
     }
+
     #eta, #finalPhase {
       margin-top: 25px;
       font-size: 1.2em;
       color: #ff4444;
     }
+
     #postExec {
       display: none;
       margin-top: 40px;
@@ -43,11 +48,20 @@
       border: 1px solid #666;
       font-size: 1.1em;
     }
+
+    .timestamp {
+      margin-top: 20px;
+      color: #999;
+      font-size: 0.95em;
+      text-align: center;
+      border-top: 1px dashed #444;
+      padding-top: 10px;
+    }
   </style>
 </head>
 <body>
   <div class="console">
-    <h1>⚠️ ISC STRIKE INTERFACE — ACCESS DENIED</h1>
+    <h1>ISC STRIKE INTERFACE — ACCESS DENIED</h1>
 
     <p><span class="label">Uplink:</span> SECURE — PROXNET NODE CZ–07</p>
     <p><span class="label">Signature Lock:</span> POSITIVE / AUTHORIZATION: FAILED</p>
@@ -62,22 +76,24 @@
     <div id="finalPhase"></div>
 
     <div id="postExec">
-      ✅ <strong>EXECUTED</strong><br><br>
-      ☑ ARRIVAL CONFIRMED — ORBITAL HOLD STABLE<br>
-      ☑ TARGET PAINTED — LASER LOCK VERIFIED<br>
-      ☑ BLAST RADIUS: ~243m<br>
-      ☑ PROJECTED COLLATERAL: 87<br>
-      ☑ NODE: SENTINEL–A3 LINK STABLE<br><br>
-      ⛔ TRANSMISSION LOST — CHANNEL CLOSED<br>
-      🗄️ ARCHIVE TRANSFER: INITIALIZED / REDACTED
+      EXECUTED<br><br>
+      ARRIVAL CONFIRMED — ORBITAL HOLD STABLE<br>
+      TARGET PAINTED — LASER LOCK VERIFIED<br>
+      BLAST RADIUS: ~243m<br>
+      PROJECTED COLLATERAL: 87<br>
+      NODE: SENTINEL–A3 LINK STABLE<br><br>
+      TRANSMISSION LOST — CHANNEL CLOSED<br>
+      ARCHIVE TRANSFER: INITIALIZED / REDACTED
+      <div class="timestamp" id="timestamp"></div>
     </div>
   </div>
 
   <script>
     let seconds = 20;
     const eta = document.getElementById("eta");
-    const postExec = document.getElementById("postExec");
     const final = document.getElementById("finalPhase");
+    const postExec = document.getElementById("postExec");
+    const ts = document.getElementById("timestamp");
 
     const phaseLines = [
       "TARGET LOCKED — HOLDING ON COORDINATE",
@@ -92,7 +108,6 @@
     const timer = setInterval(() => {
       seconds--;
       eta.textContent = `ETA: 00:00:${seconds < 10 ? "0" + seconds : seconds}`;
-
       if (seconds <= 0) {
         clearInterval(timer);
         eta.style.display = "none";
@@ -107,6 +122,9 @@
             setTimeout(() => {
               final.style.display = "none";
               postExec.style.display = "block";
+              const now = new Date();
+              const iso = now.toISOString().split(".")[0] + "Z";
+              ts.textContent = "TIMESTAMP LOG → " + iso;
             }, 2000);
           }
         }, 1700);
