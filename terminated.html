@@ -10,81 +10,106 @@
       font-family: 'Courier New', monospace;
       padding: 40px;
     }
-
     .console {
-      max-width: 700px;
+      max-width: 750px;
       margin: 0 auto;
       line-height: 1.6em;
       font-size: 1em;
       border: 1px solid #33ff33;
       padding: 20px;
     }
-
     h1 {
       text-align: center;
       color: #ff4444;
       margin-bottom: 30px;
       font-size: 1.4em;
     }
-
     .label {
       display: inline-block;
-      width: 200px;
+      width: 240px;
       font-weight: bold;
     }
-
-    #eta {
+    #eta, #finalPhase {
+      margin-top: 25px;
       font-size: 1.2em;
-      margin-top: 20px;
       color: #ff4444;
     }
-
-    .confirm {
+    #postExec {
       display: none;
-      margin-top: 30px;
+      margin-top: 40px;
       color: white;
       background: #111;
-      padding: 15px;
-      border: 1px solid #555;
+      padding: 20px;
+      border: 1px solid #666;
+      font-size: 1.1em;
     }
   </style>
 </head>
 <body>
   <div class="console">
-    <h1>⚠️ ISC STRIKE INTERFACE // ACCESS REJECTED</h1>
+    <h1>⚠️ ISC STRIKE INTERFACE — ACCESS DENIED</h1>
 
-    <p><span class="label">Uplink Status:</span> SECURE</p>
-    <p><span class="label">Node Source:</span> PROXNET CZ–07</p>
-    <p><span class="label">Target Signature:</span> POSITIVE</p>
-    <p><span class="label">Lock Sequence:</span> COORDINATES 50.2589N / 12.9442E</p>
-    <p><span class="label">Authorization:</span> FAILED — SIGMA–DELTA–113</p>
+    <p><span class="label">Uplink:</span> SECURE — PROXNET NODE CZ–07</p>
+    <p><span class="label">Signature Lock:</span> POSITIVE / AUTHORIZATION: FAILED</p>
+    <p><span class="label">Response Code:</span> SIGMA–DELTA–113</p>
     <hr>
-    <p><span class="label">Asset Deployed:</span> REAPER MQ-9</p>
-    <p><span class="label">Payload:</span> 2x AGM-114 HELLFIRE</p>
-    <p><span class="label">Fuel Status:</span> 78%</p>
-    <p><span class="label">Strike Mode:</span> TRACK + VERIFY</p>
+    <p><span class="label">Asset:</span> REAPER MQ–9</p>
+    <p><span class="label">Ordnance:</span> 2× AGM–114 HELLFIRE</p>
+    <p><span class="label">Fuel Reserve:</span> 78%</p>
+    <p><span class="label">Strike Mode:</span> LOCK + VERIFY</p>
 
     <div id="eta">ETA: 00:00:20</div>
+    <div id="finalPhase"></div>
 
-    <div class="confirm" id="confirm">
-      ✅ EXECUTE CONFIRMATION — TARGET LOCKED<br>
-      📡 Tactical feed: DISCONNECTED<br>
-      🛰️ REAPER–UNIT RETURNING TO ORBITAL NODE
+    <div id="postExec">
+      ✅ <strong>EXECUTED</strong><br><br>
+      ☑ ARRIVAL CONFIRMED — ORBITAL HOLD STABLE<br>
+      ☑ TARGET PAINTED — LASER LOCK VERIFIED<br>
+      ☑ BLAST RADIUS: ~243m<br>
+      ☑ PROJECTED COLLATERAL: 87<br>
+      ☑ NODE: SENTINEL–A3 LINK STABLE<br><br>
+      ⛔ TRANSMISSION LOST — CHANNEL CLOSED<br>
+      🗄️ ARCHIVE TRANSFER: INITIALIZED / REDACTED
     </div>
   </div>
 
   <script>
     let seconds = 20;
-    const etaDisplay = document.getElementById("eta");
-    const confirmBox = document.getElementById("confirm");
+    const eta = document.getElementById("eta");
+    const postExec = document.getElementById("postExec");
+    const final = document.getElementById("finalPhase");
+
+    const phaseLines = [
+      "TARGET LOCKED — HOLDING ON COORDINATE",
+      "ARRIVING ON TARGET DESTINATION ORBIT...",
+      "TARGET CONFIRMED ON LASER GUIDANCE...",
+      "BRACE FOR IMPACT — FINAL LOCK INITIATED...",
+      "IMPACT VECTOR: FIXED / DRIFT < 1.7%",
+      "BLAST RADIUS ESTIMATE: 243m",
+      "COLLATERAL SIGNATURE: 87 / GREENLIGHT ISSUED"
+    ];
 
     const timer = setInterval(() => {
       seconds--;
-      etaDisplay.textContent = `ETA: 00:00:${seconds < 10 ? "0" + seconds : seconds}`;
+      eta.textContent = `ETA: 00:00:${seconds < 10 ? "0" + seconds : seconds}`;
+
       if (seconds <= 0) {
         clearInterval(timer);
-        etaDisplay.style.display = "none";
-        confirmBox.style.display = "block";
+        eta.style.display = "none";
+
+        let index = 0;
+        const phaseTimer = setInterval(() => {
+          if (index < phaseLines.length) {
+            final.innerHTML += `${phaseLines[index]}<br>`;
+            index++;
+          } else {
+            clearInterval(phaseTimer);
+            setTimeout(() => {
+              final.style.display = "none";
+              postExec.style.display = "block";
+            }, 2000);
+          }
+        }, 1700);
       }
     }, 1000);
   </script>
