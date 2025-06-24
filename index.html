@@ -38,27 +38,27 @@
       margin-top: 20px;
       color: #ff4444;
       display: none;
-      .footer-brand {
-  position: fixed;
-  bottom: 10px;
-  left: 20px;
-  font-size: 0.9em;
-  color: #666;
-  font-family: 'Courier New', monospace;
-  opacity: 0.6;
-}
+    }
 
-.footer-brand a {
-  color: #999;
-  text-decoration: none;
-  transition: 0.2s ease-in-out;
-}
+    .footer-brand {
+      position: fixed;
+      bottom: 10px;
+      left: 20px;
+      font-size: 0.9em;
+      font-family: 'Courier New', monospace;
+      opacity: 0.6;
+    }
 
-.footer-brand a:hover {
-  color: #33ff99;
-  opacity: 1;
-}
+    .footer-brand a {
+      color: #999;
+      text-decoration: none;
+      margin-right: 15px;
+      transition: 0.2s ease-in-out;
+    }
 
+    .footer-brand a:hover {
+      color: #33ff99;
+      opacity: 1;
     }
   </style>
 </head>
@@ -70,6 +70,11 @@
     <br />
     <button onclick="checkCode()">Confirm</button>
     <div id="error">❌ ACCESS DENIED — Unauthorized command key</div>
+  </div>
+
+  <div class="footer-brand">
+    <a href="interspectre-corp.html">Interspectre Corporation</a> |
+    <a href="spectre-doctrine.html">Spectre Doctrine</a>
   </div>
 
   <script>
@@ -85,9 +90,5 @@
       }
     }
   </script>
-  <div class="footer-brand">
-  <a href="interspectre-corp.html">Interspectre Corporation</a>
-</div>
-
 </body>
 </html>
